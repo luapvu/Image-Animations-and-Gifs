@@ -1,0 +1,22 @@
+function [ outputImg ] = displacementRegistration( img, landmarkP, landmarkQ )
+
+[numSamples, colLength ] = size(landmarkP); % read in n samples
+[imgRowLength, imgColLength ] = size(img); % read in n samples
+outputImg = img;
+
+%Nx2 array holding the x and y coordinates of difference between q and p
+landmarkDiff =landmarkQ - landmarkP;
+weight = 0;
+
+
+for i = 1:imgColLength
+    
+    for j = 1: imgRowLength
+    outputImg(i,j) = displacementCalc(numSamples, landmarkP, landmarkQ, i, j);
+    end
+end
+
+
+
+end
+
